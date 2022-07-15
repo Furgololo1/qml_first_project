@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Button.qml</file>
+        <file>PreviewImage.qml</file>
+        <file>TransformationsList.qml</file>
+        <file>TransformationsModels.qml</file>
+        <file>SectionListView.qml</file>
+        <file>ChoosenTransformationList.qml</file>
+        <file>ChoosenTransformationModels.qml</file>
+        <file>ChoosenTransformationWindow.qml</file>
+        <file>SetRGBValueWindow.qml</file>
+        <file>ChangeValueWindow.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>images/testimg.jpeg</file>
+    </qresource>
+</RCC>
