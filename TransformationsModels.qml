@@ -6,18 +6,18 @@ ListModel {
     ListElement {
         name: "Change RGB"
         transformations: [
-            ListElement{ transform: "Change R value" },
-            ListElement{ transform: "Change G value" },
-            ListElement{ transform: "Change B value" }
+            ListElement{ transform: "Change R " },
+            ListElement{ transform: "Change G " },
+            ListElement{ transform: "Change B " }
         ]
     }
 
     ListElement{
         name: "Reset RGB channel"
         transformations:[
-            ListElement{ transform: "Reset R value" },
-            ListElement{ transform: "Reset G value" },
-            ListElement{ transform: "Reset B value" }
+            ListElement{ transform: "Reset R " },
+            ListElement{ transform: "Reset G " },
+            ListElement{ transform: "Reset B " }
         ]
     }
 

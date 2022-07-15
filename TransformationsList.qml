@@ -10,11 +10,15 @@ Rectangle{
     property var object: null
 
     signal chooseTransformationsID(transformationNameID: int, transformationID: int)
+    signal destroyCurrentValueWindow()
 
     Connections{
         target: object
         function onChoosenTransformation(id){
             chooseTransformationsID(listView.currentIndex, id)
+        }
+        function onNoFocusOnItem(){
+            destroyCurrentValueWindow()
         }
     }
 

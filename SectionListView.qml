@@ -10,6 +10,7 @@ Rectangle {
     height: 125
 
     signal choosenTransformation(transformID: int)
+    signal noFocusOnItem()
 
     Component{
         id: sectionListDelegate
@@ -22,8 +23,14 @@ Rectangle {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        smallListView.currentIndex = model.index
-                        choosenTransformation(model.index)
+                        if(smallListView.currentIndex === model.index){
+                            smallListView.currentIndex = -1
+                            noFocusOnItem()
+                        }
+                        else{
+                            smallListView.currentIndex = model.index
+                            choosenTransformation(model.index)
+                        }
                     }
                 }
             }

@@ -29,10 +29,11 @@ public slots:
 
     void changeRInImage(const QString& filePath);
 
-    void changeB();
     void changeR(const int& val);
+    void changeG(const int& val);
+    void changeB(const int& val);
 
-    
+
 private:
 
     void changeRValueInImage();

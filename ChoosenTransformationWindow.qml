@@ -3,9 +3,19 @@ import QtQuick 2.0
 Rectangle {
     id: root
 
-    function appendChoosenTransformation(nameID: int, transformID: int){
-        //list.appendChoosenTransformation(nameID, transformID)
+    signal reloadTransformatedImage()
+
+    function applyChoosenTransformation(nameID: int, transformID: int, newValue: int){
+        list.appendChoosenTransformationToList(nameID, transformID, newValue)
+        reloadTransformatedImage()
+    }
+
+    function displayValueWindow(nameID: int, transformID: int){
         changeValueWindow.chooseWindowToDisplay(nameID, transformID)
+    }
+
+    function destroyCurrentValueWindow(){
+        changeValueWindow.destroyWindow()
     }
 
     ChoosenTransformationList{
@@ -25,7 +35,6 @@ Rectangle {
                 height: 50
                 text: "Remove selected item"
 
-
                 MouseArea{
                     id: mouseAreaRemovebtn
                     anchors.fill: parent
@@ -38,7 +47,6 @@ Rectangle {
                 width: (list.width / 2) - 3
                 height: 50
                 text: "Duplicate selected item"
-
 
                 MouseArea{
                     id: mouseAreaDuplicatebtn

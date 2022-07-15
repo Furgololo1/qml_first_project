@@ -4,10 +4,8 @@ Item {
     id: root
     height: 30
 
-    property string textValue: "Set RGB value"
+    property string textValue: "Reset RGB value"
     property int defaultValue: 0
-
-    signal setRGBValue(newValue: int)
 
     Text{
         id: informationText
@@ -52,7 +50,6 @@ Item {
                     anchors.fill: parent
                     onClicked:{
                         console.log("apply changes")
-                        setRGBValue(textInput.text)
                     }
                 }
             }

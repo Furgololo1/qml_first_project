@@ -11,10 +11,16 @@ Window {
     title: qsTr("First Project QML")
 
     Connections{
-       // target: transformationList
-      //  function onChooseTransformationsID(nameID, transformID){
-       //     console.log(listModels.get(nameID).name + " choosen transform " + listModels.get(nameID).transformations.get(transformID).transform)
-       // }
+        property bool counter: true
+        target: choosenTransfromationWindow
+        function onReloadTransformatedImage(){
+            previewImage.loadNewImage("image://imageProvider/foo" + counter)
+            counter = !counter
+        }
+        // target: transformationList
+        //  function onChooseTransformationsID(nameID, transformID){
+        //     console.log(listModels.get(nameID).name + " choosen transform " + listModels.get(nameID).transformations.get(transformID).transform)
+        // }
 
         //  target: ImageManagement
         //  function onGetChoosenFile(data){
@@ -40,116 +46,101 @@ Window {
         Connections{
             target: transformationList
             function onChooseTransformationsID(nameID, transformID){
-                choosenTransfromationWindow.appendChoosenTransformation(nameID, transformID)
+                choosenTransfromationWindow.displayValueWindow(nameID, transformID)
+            }
+
+            function onDestroyCurrentValueWindow(){
+                choosenTransfromationWindow.destroyCurrentValueWindow()
             }
         }
     }
 
-//    SetRGBValueWindow{
-//        id: valueWindow
-//        x: 50
-//        y: 500
-//    }
-
     TransformationsModels{id: listModels}
 
+//    Button{
+//        id: resetButton
+//        x:0
+//        y:0
+//        width: 150
+//        height: 50
+//        text: "resetButton"
+//        MouseArea{
+//            id: mouseArearesetButton
+//            anchors.fill: parent
+//            onClicked: {
+//                //    baseImage.loadNewImage("image://imageProvider/foo2")
+//                previewImage.loadNewImage("image://imageProvider/foo123456")
+//            }
+//        }
+//    }
 
-    //    Row{
-    //        spacing: 25
-    //        anchors.margins: 25
-    //        anchors.top: parent.top
-    //        anchors.horizontalCenter: parent.horizontalCenter
 
-    //        Button{
-    //            id: loadImageButton
-    //            width: 150
-    //            height: 50
-    //            text: "Load image"
-    //            MouseArea{
-    //                id: mouseAreaLoadbtn
-    //                anchors.fill: parent
-    //                onClicked: {
-    //                    ImageManagement.openFileDialog();
-    //                    baseImage.loadNewImage("image://imageProvider/foo")
-    //                    previewImage.loadNewImage("image://imageProvider/foo")
-    //                }
-    //            }
-    //        }
+    Row{
+        spacing: 25
+        anchors.margins: 25
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
 
-    //        Button{
-    //            id: saveImageButton
-    //            width: 150
-    //            height: 50
-    //            text: "Save image"
-    //            MouseArea{
-    //                id: mouseAreaSavebtn
-    //                anchors.fill: parent
-    //                onClicked: ImageManagement.saveFile(previewImage.filePath);
-    //            }
-    //        }
+        Button{
+            id: loadImageButton
+            width: 150
+            height: 50
+            text: "Load image"
+            MouseArea{
+                id: mouseAreaLoadbtn
+                anchors.fill: parent
+                onClicked: {
+                    ImageManagement.openFileDialog();
+                    baseImage.loadNewImage("image://imageProvider/foo")
+                    previewImage.loadNewImage("image://imageProvider/foo")
+                }
+            }
+        }
 
-    //        Button{
-    //            id: uploadImageButton
-    //            width: 150
-    //            height: 50
-    //            text: "Upload image"
-    //            MouseArea{
-    //                id: mouseAreaUploadbtn
-    //                anchors.fill: parent
-    //                onClicked: previewImage.loadNewImage("image://imageProvider/red")
-    //            }
-    //        }
+        Button{
+            id: saveImageButton
+            width: 150
+            height: 50
+            text: "Save image"
+            MouseArea{
+                id: mouseAreaSavebtn
+                anchors.fill: parent
+                onClicked: ImageManagement.saveFile(previewImage.filePath);
+            }
+        }
 
-    //        Button{
-    //            id: changeRedImageButton
-    //            width: 150
-    //            height: 50
-    //            text: "Change Red Image Button"
-    //            MouseArea{
-    //                id: mouseAreaChangeR
-    //                anchors.fill: parent
-    //                onClicked:{
-    //                    ImageManagement.changeR(100)
-    //                    previewImage.loadNewImage("image://imageProvider/red")
-    //                }
-    //            }
-    //        }
-    //        Button{
-    //            id: changeBlueImageButton
-    //            width: 150
-    //            height: 50
-    //            text: "Change Blue Image Button"
-    //            MouseArea{
-    //                id: mouseAreaChangeB
-    //                anchors.fill: parent
-    //                onClicked:{
-    //                    ImageManagement.changeB()
-    //                    previewImage.loadNewImage("image://imageProvider/mirror")
-    //                }
-    //            }
-    //        }
+        Button{
+            id: uploadImageButton
+            width: 150
+            height: 50
+            text: "Upload image"
+            MouseArea{
+                id: mouseAreaUploadbtn
+                anchors.fill: parent
+                onClicked: previewImage.loadNewImage("image://imageProvider/red")
+            }
+        }
+    }
 
-    //}
+    Row{
+        spacing: 25
+        anchors.margins: 25
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
 
-    //Row{
-    //    spacing: 25
-    //    anchors.margins: 25
-    //    anchors.left: parent.left
-    //    anchors.bottom: parent.bottom
+        PreviewImage{
+            id: baseImage
+            width: 300
+            height: 300
+            altText: qsTr("Base Image")
+        }
 
-    //    PreviewImage{
-    //        id: baseImage
-    //        width: 300
-    //        height: 300
-    //        altText: qsTr("Base Image")
-    //    }
-
-    //    PreviewImage{
-    //        id: previewImage
-    //        width: 300
-    //        height: 300
-    //        altText: qsTr("Preview Image")
-    //    }
-    //}
+        PreviewImage{
+            id: previewImage
+            width: 300
+            height: 300
+            altText: qsTr("Preview Image")
+        }
+    }
 
 }

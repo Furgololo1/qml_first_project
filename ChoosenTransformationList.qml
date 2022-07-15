@@ -8,16 +8,16 @@ Rectangle{
     width: 200
     height: 175
 
-    function appendChoosenTransformation(nameID: int, transformID: int){
+    function appendChoosenTransformationToList(nameID: int, transformID: int, transformValue: int){
         choosenTransformationsModels.append({name: transformationsModels.get(nameID).name,
-        transform: transformationsModels.get(nameID).transformations.get(transformID).transform, value: 15})
+        transform: transformationsModels.get(nameID).transformations.get(transformID).transform, value: transformValue})
     }
 
     Component {
         id: listDelegate
 
         Text {
-            text: model.transform + " value: " + model.value
+            text: model.transform + " (value: " + model.value + ")"
             font.pointSize: 15
             width: root.width
             MouseArea{
@@ -33,7 +33,6 @@ Rectangle{
         }
     }
     ListModel { id: choosenTransformationsModels }
-    //ChoosenTransformationModels{id: choosenTransformationsModels}
     TransformationsModels{id: transformationsModels}
 
     ListView {

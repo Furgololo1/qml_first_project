@@ -7,10 +7,14 @@
         <file>TransformationsModels.qml</file>
         <file>SectionListView.qml</file>
         <file>ChoosenTransformationList.qml</file>
-        <file>ChoosenTransformationModels.qml</file>
         <file>ChoosenTransformationWindow.qml</file>
         <file>SetRGBValueWindow.qml</file>
         <file>ChangeValueWindow.qml</file>
+        <file>ResetRGBValueWindow.qml</file>
+        <file>FlipImageWindow.qml</file>
+        <file>RotationWindow.qml</file>
+        <file>MoveImageWindow.qml</file>
+        <file>SaturationWindow.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/testimg.jpeg</file>
