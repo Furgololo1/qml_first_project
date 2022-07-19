@@ -5,15 +5,17 @@ ListModel {
 
     ListElement {
         name: "Change RGB"
+        bHasArray: true
         transformations: [
-            ListElement{ transform: "Change R " },
-            ListElement{ transform: "Change G " },
-            ListElement{ transform: "Change B " }
+            ListElement{ transform: "Change R value" },
+            ListElement{ transform: "Change G value" },
+            ListElement{ transform: "Change B value" }
         ]
     }
 
     ListElement{
         name: "Reset RGB channel"
+        bHasArray: false
         transformations:[
             ListElement{ transform: "Reset R " },
             ListElement{ transform: "Reset G " },
@@ -23,56 +25,37 @@ ListModel {
 
     ListElement{
         name: "Rotation"
+        bHasArray: false
         transformations:[
-            ListElement{ transform: "90 degrees" },
-            ListElement{ transform: "180 degrees" },
-            ListElement{ transform: "270 degrees" }
+            ListElement{ transform: "Rotated image 90 degrees" },
+            ListElement{ transform: "Rotated image 180 degrees" },
+            ListElement{ transform: "Rotated image 270 degrees" }
         ]
     }
 
     ListElement{
         name: "Flip image"
+        bHasArray: false
         transformations:[
-            ListElement{ transform: "Vertically" },
-            ListElement{ transform: "Horizontally" }
+            ListElement{ transform: "Flipped image vertically" },
+            ListElement{ transform: "Flipped image horizontally" }
         ]
     }
 
     ListElement{
-        name: "Move image"
+        name: "Draw text on image"
+        bHasArray: true
+        transformations:[
+            ListElement{ transform: "Font" },
+            ListElement{ transform: "Font color" },
+            ListElement{ transform: "Text layout" }
+        ]
     }
 
     ListElement {
-        name: "Saturation"
+        name: "Gray scale"
+        bHasArray: false
     }
-
-    //            ListElement {
-    //                name: "Change RGB value"; section: "ChangeRGB"
-    //            }
-    //            ListElement {
-    //                name: "Reset RGB channel"; section: "ChangeRGB"
-    //            }
-    //            ListElement {
-    //                name: "90 degress"; section: "Rotation"
-    //            }
-    //            ListElement {
-    //                name: "180 degress"; section: "Rotation"
-    //            }
-    //            ListElement {
-    //                name: "270 degress"; section: "Rotation"
-    //            }
-    //            ListElement {
-    //                name: "Vertically"; section: "Flip image"
-    //            }
-    //            ListElement {
-    //                name: "Horizontally"; section: "Flip image"
-    //            }
-    //            ListElement {
-    //                name: "Move image"; section: "Transformations"
-    //            }
-    //            ListElement {
-    //                name: "Saturation"
-    //            }
 
 }
 

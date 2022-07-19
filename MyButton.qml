@@ -10,24 +10,25 @@ Item {
     property color colorClicked: "#059FEB"
     property string text: "Text"
 
+    signal buttonPressed()
+
     Rectangle{
         id: borderRect
         anchors.fill: root
         opacity: 1
-        border.color: "#000000"
-        border.width: 2
 
         Rectangle{
             id: rect
             anchors.fill: parent
             color: root.color
-            opacity: 0.8
+            opacity: 0.5
 
             MouseArea{
                 id: mouseArea
                 anchors.fill: rect
-                onPressed: rect.opacity = 0.4
-                onReleased: rect.opacity = 0.8
+                onClicked: buttonPressed()
+                onPressed: rect.opacity = 0.35
+                onReleased: rect.opacity = 0.5
             }
         }
     }

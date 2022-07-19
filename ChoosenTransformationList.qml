@@ -8,16 +8,15 @@ Rectangle{
     width: 200
     height: 175
 
-    function appendChoosenTransformationToList(nameID: int, transformID: int, transformValue: int){
-        choosenTransformationsModels.append({name: transformationsModels.get(nameID).name,
-        transform: transformationsModels.get(nameID).transformations.get(transformID).transform, value: transformValue})
+    function appendChoosenTransformationToList(text: string){
+        choosenTransformationsModels.append({name: text})
     }
 
     Component {
         id: listDelegate
 
         Text {
-            text: model.transform + " (value: " + model.value + ")"
+            text: model.name
             font.pointSize: 15
             width: root.width
             MouseArea{

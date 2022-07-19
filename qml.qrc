@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Button.qml</file>
         <file>PreviewImage.qml</file>
         <file>TransformationsList.qml</file>
         <file>TransformationsModels.qml</file>
@@ -14,7 +13,11 @@
         <file>FlipImageWindow.qml</file>
         <file>RotationWindow.qml</file>
         <file>MoveImageWindow.qml</file>
-        <file>SaturationWindow.qml</file>
+        <file>MyButton.qml</file>
+        <file>GrayScaleWindow.qml</file>
+        <file>TextSettingsWindow.qml</file>
+        <file>MyComboBox.qml</file>
+        <file>TextSettingsListView.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/testimg.jpeg</file>

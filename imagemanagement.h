@@ -25,13 +25,26 @@ signals:
 public slots:
     void openFileDialog();
 
-    void saveFile(const QString& filePath);
+    void saveImage();
 
     void changeRInImage(const QString& filePath);
 
     void changeR(const int& val);
     void changeG(const int& val);
     void changeB(const int& val);
+
+    void resetRValue();
+    void resetGValue();
+    void resetBValue();
+
+    void rotateImage(const int& angle);
+
+    void grayScale();
+
+    void flipImage(bool bVertically);
+
+    void test();
+
 
 
 private:

@@ -15,7 +15,6 @@ Item {
         baseImage.source = fileToOpen
         filePath = fileToOpen
         rectOpacity = 0
-        console.log("loadNewImage from PreviewImage comp")
     }
 
     Image {

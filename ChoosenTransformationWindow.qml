@@ -5,9 +5,9 @@ Rectangle {
 
     signal reloadTransformatedImage()
 
-    function applyChoosenTransformation(nameID: int, transformID: int, newValue: int){
-        list.appendChoosenTransformationToList(nameID, transformID, newValue)
+    function applyChoosenTransformation(text){
         reloadTransformatedImage()
+        list.appendChoosenTransformationToList(text)
     }
 
     function displayValueWindow(nameID: int, transformID: int){
@@ -29,30 +29,20 @@ Rectangle {
             anchors.topMargin: 6
             spacing: 6
 
-            Button{
+            MyButton{
                 id: removeBtn
                 width: (list.width / 2) - 3
                 height: 50
                 text: "Remove selected item"
-
-                MouseArea{
-                    id: mouseAreaRemovebtn
-                    anchors.fill: parent
-                    onClicked: console.log("remove smth")
-                }
+                onButtonPressed: console.log("remove smth")
             }
 
-            Button{
+            MyButton{
                 id: duplicateBtn
                 width: (list.width / 2) - 3
                 height: 50
                 text: "Duplicate selected item"
-
-                MouseArea{
-                    id: mouseAreaDuplicatebtn
-                    anchors.fill: parent
-                    onClicked: console.log("duplicate smth")
-                }
+                onButtonPressed: console.log("duplicate smth")
             }
         }
         ChangeValueWindow{
@@ -64,6 +54,4 @@ Rectangle {
             anchors.topMargin: 6
         }
     }
-
-
 }

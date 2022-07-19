@@ -60,7 +60,7 @@ Rectangle{
 
         model: TransformationsModels{}
         delegate: listDelegate
-       // focus: true
+        // focus: true
         interactive: false
 
         highlightMoveVelocity: -1
@@ -78,20 +78,26 @@ Rectangle{
                 object.destroy()
                 bIsSomeSectionListView = false;
             }
-
-            var component = Qt.createComponent("SectionListView.qml")
-            object = component.createObject(listView, {index: currentIndex})
-            object.x = listView.width + 2
-            object.y = listView.currentItem.y
-            object.index = currentIndex
-            bIsSomeSectionListView = true;
-
+            if(model.get(currentIndex).bHasArray === false){
+                chooseTransformationsID(currentIndex, -1)
+//                return
+            }
+            else{
+                var component = Qt.createComponent("SectionListView.qml")
+                object = component.createObject(listView, {index: currentIndex})
+                object.x = listView.width + 2
+                object.y = listView.currentItem.y
+                object.index = currentIndex
+                bIsSomeSectionListView = true;
+            }
         }
 
         function destroyObject(){
+            if(bIsSomeSectionListView === true)
+                object.destroy()
+            destroyCurrentValueWindow()
             bIsSomeSectionListView = false
             currentIndex = -1
-            object.destroy()
         }
 
     }

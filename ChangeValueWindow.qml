@@ -10,19 +10,11 @@ Rectangle {
     property int currentNameID: 0
     property int currentTransformationID: 0
 
-//    signal applyImageTransformation(nameID: int, transformID: int)
 
     Connections{
         target: window
-        function onSetRGBValue(newValue){
-            if(currentTransformationID === 0)
-                ImageManagement.changeR(newValue)
-            else if(currentTransformationID === 1)
-                ImageManagement.changeG(newValue)
-            else if(currentTransformationID === 2)
-                ImageManagement.changeB(newValue)
-
-            applyChoosenTransformation(currentNameID, currentTransformationID, newValue)
+        function onApplyChanges(text){
+            applyChoosenTransformation(text)
         }
     }
 
@@ -30,6 +22,7 @@ Rectangle {
         bIsCurrentlySetWindow = false
         window.destroy()
     }
+
 
     function chooseWindowToDisplay(nameID: int, transformationID){
         if(bIsCurrentlySetWindow === true)
@@ -39,24 +32,37 @@ Rectangle {
             let component = Qt.createComponent("SetRGBValueWindow.qml")
             window = component.createObject(root, {})
             window.anchors.fill = root
+
             if(transformationID === 0)
-                window.textValue = "Set R value"
+                window.textValue = "Change R value"
             else if(transformationID === 1)
-                window.textValue = "Set G value"
+                window.textValue = "Change G value"
             else if(transformationID === 2)
-                window.textValue = "Set B value"
+                window.textValue = "Change B value"
         }
 
         else if(nameID === 1){
             let component = Qt.createComponent("ResetRGBValueWindow.qml")
             window = component.createObject(root, {})
             window.anchors.fill = root
-            if(transformationID === 0)
-                window.textValue = "Reset R value"
-            else if(transformationID === 1)
-                window.textValue = "Reset G value"
-            else if(transformationID === 2)
-                window.textValue = "Reset B value"
+        }
+
+        else if(nameID === 2){
+            let component = Qt.createComponent("RotationWindow.qml")
+            window = component.createObject(root, {})
+            window.anchors.fill = root
+        }
+
+        else if(nameID === 3){
+            let component = Qt.createComponent("FlipImageWindow.qml")
+            window = component.createObject(root, {})
+            window.anchors.fill = root
+        }
+
+        else if(nameID === 5){
+            let component = Qt.createComponent("GrayScaleWindow.qml")
+            window = component.createObject(root, {})
+            window.anchors.fill = root
         }
 
         bIsCurrentlySetWindow = true

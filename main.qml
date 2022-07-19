@@ -14,20 +14,29 @@ Window {
         property bool counter: true
         target: choosenTransfromationWindow
         function onReloadTransformatedImage(){
-            previewImage.loadNewImage("image://imageProvider/foo" + counter)
             counter = !counter
+            previewImage.loadNewImage("image://imageProvider/transform" + counter)
         }
-        // target: transformationList
-        //  function onChooseTransformationsID(nameID, transformID){
-        //     console.log(listModels.get(nameID).name + " choosen transform " + listModels.get(nameID).transformations.get(transformID).transform)
-        // }
+    }
 
-        //  target: ImageManagement
-        //  function onGetChoosenFile(data){
-        //    baseImage.loadNewImage("file:///" + data)
-        //previewImage.loadNewImage("image://imageProvider/" + data)
-        //    previewImage.loadNewImage("image://imageProvider/foo")
-        // }
+
+    TextSettingsWindow{
+        x: 100
+        y: 300
+        width: 200
+        height: 30
+    }
+
+
+    MyButton{
+        id: testBtn
+        width: 150
+        height: 50
+        text: "Blur"
+        onButtonPressed:{
+            ImageManagement.test();
+            previewImage.loadNewImage("image://imageProvider/asdohsdlasbgd")
+        }
     }
 
     TransformationsList{
@@ -55,25 +64,6 @@ Window {
         }
     }
 
-    TransformationsModels{id: listModels}
-
-//    Button{
-//        id: resetButton
-//        x:0
-//        y:0
-//        width: 150
-//        height: 50
-//        text: "resetButton"
-//        MouseArea{
-//            id: mouseArearesetButton
-//            anchors.fill: parent
-//            onClicked: {
-//                //    baseImage.loadNewImage("image://imageProvider/foo2")
-//                previewImage.loadNewImage("image://imageProvider/foo123456")
-//            }
-//        }
-//    }
-
 
     Row{
         spacing: 25
@@ -81,43 +71,35 @@ Window {
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
 
-        Button{
+        MyButton{
             id: loadImageButton
             width: 150
             height: 50
             text: "Load image"
-            MouseArea{
-                id: mouseAreaLoadbtn
-                anchors.fill: parent
-                onClicked: {
-                    ImageManagement.openFileDialog();
-                    baseImage.loadNewImage("image://imageProvider/foo")
-                    previewImage.loadNewImage("image://imageProvider/foo")
-                }
+            onButtonPressed:{
+                ImageManagement.openFileDialog();
+                baseImage.loadNewImage("image://imageProvider/foo")
+                previewImage.loadNewImage("image://imageProvider/foo")
             }
         }
 
-        Button{
+        MyButton{
             id: saveImageButton
             width: 150
             height: 50
             text: "Save image"
-            MouseArea{
-                id: mouseAreaSavebtn
-                anchors.fill: parent
-                onClicked: ImageManagement.saveFile(previewImage.filePath);
+            onButtonPressed:{
+                ImageManagement.saveImage()
             }
         }
 
-        Button{
+        MyButton{
             id: uploadImageButton
             width: 150
             height: 50
             text: "Upload image"
-            MouseArea{
-                id: mouseAreaUploadbtn
-                anchors.fill: parent
-                onClicked: previewImage.loadNewImage("image://imageProvider/red")
+            onButtonPressed:{
+                previewImage.loadNewImage("image://imageProvider/red")
             }
         }
     }
@@ -141,6 +123,7 @@ Window {
             height: 300
             altText: qsTr("Preview Image")
         }
+
     }
 
 }
