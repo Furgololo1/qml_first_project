@@ -7,14 +7,17 @@ Rectangle {
     border.color: "#000000"
     height: 175
 
-    signal currentIndexChanged(fontName: string)
+    property ListModel listModel: null
+
+    signal currentIndexChanged(index: int, fontName: string)
 
     Component{
         id: sectionListDelegate
 
         Text {
             id: delegateText
-            text: modelData
+            text: listModel ? model.name : modelData
+            font.family: listModel ? model.name : modelData
             font.pointSize: 12
             width: root.width
 
@@ -26,7 +29,7 @@ Rectangle {
                     }
                     else{
                         listView.currentIndex = model.index
-                        currentIndexChanged(delegateText.text)
+                        currentIndexChanged(model.index, delegateText.text)
                     }
                 }
             }
@@ -42,14 +45,14 @@ Rectangle {
         clip: true
         currentIndex: -1
 
-        model: Qt.fontFamilies()
+        model: listModel ? listModel : Qt.fontFamilies()
 
         delegate: sectionListDelegate
 
         highlightMoveVelocity: -1
         highlight: Rectangle{
             anchors.left: parent.left; anchors.right: parent.right
-            color: "pink"
+            color: "#58D9FF"
             height: 25
         }
     }

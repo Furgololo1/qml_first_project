@@ -1,0 +1,6 @@
+#AEAEAE more lighter gray
+#C7C7C7 lighter gray
+#595959 darker gray
+
+#58D9FF lighter blue
+#05C7FF normal blue

@@ -9,7 +9,7 @@ Item {
 
     MyButton{
         id: grayScaleBtn
-        width: (root.width / 2) - 3
+        width: root.width
         height: root.height
 
         text: "Apply gray scale"

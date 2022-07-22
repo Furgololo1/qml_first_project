@@ -12,6 +12,16 @@ Rectangle{
     signal chooseTransformationsID(transformationNameID: int, transformationID: int)
     signal destroyCurrentValueWindow()
 
+
+    Text {
+        id: altText
+        text: "Transformations"
+        anchors.horizontalCenter: parent.horizontalCenter
+        font.bold: true
+        font.pointSize: 18
+        y: -35
+    }
+
     Connections{
         target: object
         function onChoosenTransformation(id){
@@ -66,7 +76,7 @@ Rectangle{
         highlightMoveVelocity: -1
         highlight: Rectangle{
             anchors.left: parent.left; anchors.right: parent.right
-            color: "pink"
+            color: "#58D9FF"
             height: 75
 
         }

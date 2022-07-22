@@ -40,7 +40,13 @@
     <ClCompile Include="imagemanagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="imageprovider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="treeviewmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,8 +54,16 @@
     <QtMoc Include="imagemanagement.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="imageprovider.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="treeviewmodel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
+    
+    
     
     
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -60,9 +74,65 @@
     </CustomBuild>
     
     
+    
+    
   </ItemGroup>
   <ItemGroup>
-    <None Include="Button.qml">
+    <None Include="AlignmentModels.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ChangeFontColorWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ChangeValueWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ChoosenTransformationList.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ChoosenTransformationWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="FlipImageWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="GrayScaleWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="MoveImageWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="MyButton.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="MyComboBox.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="PreviewImage.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ResetRGBValueWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RotationWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SectionListView.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SetRGBValueWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="TextSettingsListView.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="TextSettingsWindow.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="TransformationsList.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="TransformationsModels.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="main.qml">

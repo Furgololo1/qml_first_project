@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 Rectangle {
     id: root
+    z: 1
 
     signal reloadTransformatedImage()
 
@@ -18,9 +19,22 @@ Rectangle {
         changeValueWindow.destroyWindow()
     }
 
+    function clearListModels(){
+        list.removeFromModel(-1, true)
+    }
+
     ChoosenTransformationList{
         id: list
         anchors.fill: root
+
+        Text {
+            id: altText
+            text: "Choosen transformations"
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.bold: true
+            font.pointSize: 18
+            y: -40
+        }
 
         Row{
             id: row
@@ -32,17 +46,29 @@ Rectangle {
             MyButton{
                 id: removeBtn
                 width: (list.width / 2) - 3
-                height: 50
+                height: 30
+                color: "#FF0136"
                 text: "Remove selected item"
-                onButtonPressed: console.log("remove smth")
+                onButtonPressed:{
+                    console.log("remove smth")
+                    list.removeFromModel(list.indexToRemove, false)
+                    ImageManagement.remove(list.indexToRemove)
+                    reloadTransformatedImage()
+                }
             }
 
             MyButton{
                 id: duplicateBtn
                 width: (list.width / 2) - 3
-                height: 50
+                height: 30
+                color: "#C7C7C7"
                 text: "Duplicate selected item"
-                onButtonPressed: console.log("duplicate smth")
+                onButtonPressed:{
+                    console.log("duplicate smth")
+                    ImageManagement.duplicate(list.indexToRemove)
+                    list.appendChoosenTransformationToListDuplicate()
+                    reloadTransformatedImage()
+                }
             }
         }
         ChangeValueWindow{
@@ -52,6 +78,7 @@ Rectangle {
             anchors.left: row.left
             anchors.top: row.bottom
             anchors.topMargin: 6
+            z: 1
         }
     }
 }

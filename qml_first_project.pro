@@ -6,6 +6,7 @@ QT += widgets
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        datatorestored.cpp \
         imagemanagement.cpp \
         imageprovider.cpp \
         main.cpp \
@@ -19,6 +20,7 @@ QML_IMPORT_PATH = E:/Qt/Tools/QtCreator/bin/
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
 
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
@@ -27,6 +29,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES +=
 
 HEADERS += \
+    ERestoreInfo.h \
+    datatorestored.h \
     imagemanagement.h \
     imageprovider.h \
     treeviewmodel.h

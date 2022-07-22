@@ -59,6 +59,12 @@ Rectangle {
             window.anchors.fill = root
         }
 
+        else if(nameID === 4){
+            let component = Qt.createComponent("TextSettingsWindow.qml")
+            window = component.createObject(root, {})
+            window.anchors.fill = root
+        }
+
         else if(nameID === 5){
             let component = Qt.createComponent("GrayScaleWindow.qml")
             window = component.createObject(root, {})

@@ -5,10 +5,10 @@ Item {
     width: 100
     height: 50
 
-    property color color: "#059FEB"
-    property color colorHovered: "#059FEB"
-    property color colorClicked: "#059FEB"
+    property color color: "#05C7FF"
     property string text: "Text"
+    property string textColor: "#000000"
+    property string fontFamily: "Arial"
 
     signal buttonPressed()
 
@@ -21,14 +21,14 @@ Item {
             id: rect
             anchors.fill: parent
             color: root.color
-            opacity: 0.5
+            opacity: 1
 
             MouseArea{
                 id: mouseArea
                 anchors.fill: rect
                 onClicked: buttonPressed()
-                onPressed: rect.opacity = 0.35
-                onReleased: rect.opacity = 0.5
+                onPressed: rect.opacity = 0.7
+                onReleased: rect.opacity = 1
             }
         }
     }
@@ -36,8 +36,9 @@ Item {
     Text{
         id: displayText
         text: root.text
+        font.family: fontFamily
         anchors.centerIn: root
-        color: "#000000"
+        color: textColor
         opacity: 0.8
         font.bold: true
     }

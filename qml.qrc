@@ -18,6 +18,8 @@
         <file>TextSettingsWindow.qml</file>
         <file>MyComboBox.qml</file>
         <file>TextSettingsListView.qml</file>
+        <file>AlignmentModels.qml</file>
+        <file>ChangeFontColorWindow.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/testimg.jpeg</file>

@@ -5,8 +5,8 @@ import QtQuick.Controls 2.3
 
 
 Window {
-    width: 1200
-    height: 1000
+    width: 800
+    height: 930
     visible: true
     title: qsTr("First Project QML")
 
@@ -19,55 +19,10 @@ Window {
         }
     }
 
-
-    TextSettingsWindow{
-        x: 100
-        y: 300
-        width: 200
-        height: 30
-    }
-
-
-    MyButton{
-        id: testBtn
-        width: 150
-        height: 50
-        text: "Blur"
-        onButtonPressed:{
-            ImageManagement.test();
-            previewImage.loadNewImage("image://imageProvider/asdohsdlasbgd")
-        }
-    }
-
-    TransformationsList{
-        id: transformationList
-        x: 200
-        y: 100
-    }
-
-    ChoosenTransformationWindow{
-        id: choosenTransfromationWindow
-        x: 600
-        y: 100
-        width: 300
-        height: 300
-
-        Connections{
-            target: transformationList
-            function onChooseTransformationsID(nameID, transformID){
-                choosenTransfromationWindow.displayValueWindow(nameID, transformID)
-            }
-
-            function onDestroyCurrentValueWindow(){
-                choosenTransfromationWindow.destroyCurrentValueWindow()
-            }
-        }
-    }
-
-
     Row{
-        spacing: 25
-        anchors.margins: 25
+        id: buttonRow
+        spacing: 35
+        anchors.margins: 35
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -94,36 +49,82 @@ Window {
         }
 
         MyButton{
-            id: uploadImageButton
+            id: resetImageButton
             width: 150
             height: 50
-            text: "Upload image"
+            text: "Reset"
             onButtonPressed:{
-                previewImage.loadNewImage("image://imageProvider/red")
+                baseImage.loadNewImage("")
+                previewImage.loadNewImage("")
+                choosenTransfromationWindow.clearListModels()
+                ImageManagement.clearAll();
             }
         }
     }
 
-    Row{
-        spacing: 25
-        anchors.margins: 25
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
 
-        PreviewImage{
-            id: baseImage
-            width: 300
-            height: 300
-            altText: qsTr("Base Image")
+    Item{
+
+        anchors.topMargin: 70
+        anchors.top: buttonRow.bottom
+        x: 100
+        //anchors.horizontalCenter: buttonRow.horizontalCenter
+
+        Column{
+            id: imageRow
+            spacing: 35
+
+
+            PreviewImage{
+                id: baseImage
+                width: 300
+                height: 300
+                altText: qsTr("Base Image")
+                z: 0
+            }
+
+            PreviewImage{
+                id: previewImage
+                width: 300
+                height: 300
+                altText: qsTr("Preview Image")
+                z: 0
+            }
+
         }
 
-        PreviewImage{
-            id: previewImage
-            width: 300
-            height: 300
-            altText: qsTr("Preview Image")
-        }
+        Column{
+            spacing: 35
+            anchors.left: imageRow.right
+            anchors.top: imageRow.top
+            anchors.leftMargin: 25
 
+            TransformationsList{
+                id: transformationList
+                anchors.horizontalCenter: parent.horizontalCenter
+                // x: 600
+                // y: 300
+            }
+
+            ChoosenTransformationWindow{
+                id: choosenTransfromationWindow
+                //  x: 600
+                //   y: 550
+                width: 300
+                height: 200
+
+                Connections{
+                    target: transformationList
+                    function onChooseTransformationsID(nameID, transformID){
+                        choosenTransfromationWindow.displayValueWindow(nameID, transformID)
+                    }
+
+                    function onDestroyCurrentValueWindow(){
+                        choosenTransfromationWindow.destroyCurrentValueWindow()
+                    }
+                }
+            }
+        }
     }
 
 }

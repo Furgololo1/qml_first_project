@@ -54,7 +54,7 @@ Rectangle {
         highlightMoveVelocity: -1
         highlight: Rectangle{
             anchors.left: parent.left; anchors.right: parent.right
-            color: "pink"
+            color: "#58D9FF"
             height: 25
         }
     }
