@@ -5,6 +5,7 @@ import QtQuick.Controls 2.3
 
 
 Window {
+    id: window
     width: 800
     height: 930
     visible: true

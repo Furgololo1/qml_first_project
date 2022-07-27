@@ -47,10 +47,10 @@ void ImageManagement::changeR(const int& val)
         }
     }
 
-    DataToRestored data;
+    DataToRestored data(ERestoreInfo::RValue);
     data.setRList(std::move(rValueList));
 
-    dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(std::move(data), ERestoreInfo::RValue));
+    dataArray.push_back(DataToRestored(std::move(data)));
 
     imageProvider->setImage(image);
 }
@@ -79,10 +79,10 @@ void ImageManagement::changeG(const int& val)
         }
     }
 
-    DataToRestored data;
+    DataToRestored data(ERestoreInfo::GValue);
     data.setGList(std::move(gValueList));
 
-    dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(std::move(data), ERestoreInfo::GValue));
+    dataArray.push_back(DataToRestored(std::move(data)));
 
     imageProvider->setImage(image);
 }
@@ -111,10 +111,10 @@ void ImageManagement::changeB(const int& val)
         }
     }
 
-    DataToRestored data;
+    DataToRestored data(ERestoreInfo::BValue);
     data.setBList(std::move(bValueList));
 
-    dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(std::move(data), ERestoreInfo::BValue));
+    dataArray.push_back(DataToRestored(std::move(data)));
 
     imageProvider->setImage(image);
 }
@@ -135,10 +135,10 @@ void ImageManagement::resetRValue()
         }
     }
 
-    DataToRestored data;
+    DataToRestored data(ERestoreInfo::RValue);
     data.setRList(std::move(rValueList));
 
-    dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(std::move(data), ERestoreInfo::RValue));
+    dataArray.push_back(DataToRestored(std::move(data)));
 
     imageProvider->setImage(image);
 }
@@ -159,10 +159,10 @@ void ImageManagement::resetGValue()
         }
     }
 
-    DataToRestored data;
+    DataToRestored data(ERestoreInfo::GValue);
     data.setGList(std::move(gValueList));
 
-    dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(std::move(data), ERestoreInfo::GValue));
+    dataArray.push_back(DataToRestored(std::move(data)));
 
     imageProvider->setImage(image);
 }
@@ -183,10 +183,10 @@ void ImageManagement::resetBValue()
         }
     }
 
-    DataToRestored data;
+    DataToRestored data(ERestoreInfo::BValue);
     data.setBList(std::move(bValueList));
 
-    dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(std::move(data), ERestoreInfo::BValue));
+    dataArray.push_back(DataToRestored(std::move(data)));
 
     imageProvider->setImage(image);
 }
@@ -197,10 +197,10 @@ void ImageManagement::rotateImage(float angle)
     rotating.rotate(angle);
     image = image.transformed(rotating);
 
-    DataToRestored data;
+    DataToRestored data(ERestoreInfo::Angle);
     data.setAngle(angle);
 
-    dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(std::move(data), ERestoreInfo::Angle));
+    dataArray.push_back(DataToRestored(std::move(data)));
 
     imageProvider->setImage(image);
 }
@@ -238,10 +238,10 @@ void ImageManagement::grayScale()
         }
     }
 
-    DataToRestored data;
+    DataToRestored data(ERestoreInfo::RGB);
     data.setRGBList(std::move(rgbList));
 
-    dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(std::move(data), ERestoreInfo::RGB));
+    dataArray.push_back(DataToRestored(std::move(data)));
 
     imageProvider->setImage(image);
 
@@ -252,12 +252,12 @@ void ImageManagement::flipImage(bool bVertically)
     QTransform transform;
     if(bVertically){                //vertically
         image = image.transformed(transform.scale(1,-1));
-        dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(DataToRestored(), ERestoreInfo::FlippedVertically));
+        dataArray.push_back(DataToRestored(DataToRestored(ERestoreInfo::FlippedVertically)));
     }
 
     else{                           //horizontally
         image = image.transformed(transform.scale(-1,1));
-        dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(DataToRestored(), ERestoreInfo::FlippedHorizontally));
+        dataArray.push_back(DataToRestored(DataToRestored(ERestoreInfo::FlippedHorizontally)));
     }
 
     imageProvider->setImage(image);
@@ -265,7 +265,7 @@ void ImageManagement::flipImage(bool bVertically)
 
 void ImageManagement::drawTextOnImage(QColor& color, QString fontFamily, int pointSize, Qt::Alignment align, QString text)
 {
-    DataToRestored data;
+    DataToRestored data(ERestoreInfo::TextOnImage);
     data.setImageBeforeInsertingText(image);
 
     QPainter painter;
@@ -275,7 +275,7 @@ void ImageManagement::drawTextOnImage(QColor& color, QString fontFamily, int poi
     painter.drawText(image.rect(), align, text);
     painter.end();
 
-    dataList.push_back(std::make_pair<DataToRestored, ERestoreInfo>(std::move(data), ERestoreInfo::TextOnImage));
+    dataArray.push_back(DataToRestored(std::move(data)));
 
     imageProvider->setImage(image);
 }
@@ -283,24 +283,24 @@ void ImageManagement::drawTextOnImage(QColor& color, QString fontFamily, int poi
 void ImageManagement::remove(const int &index)
 {
 
-    std::list<std::pair<DataToRestored,ERestoreInfo>>::iterator it = dataList.begin();
+    std::vector<DataToRestored>::iterator it = dataArray.begin();
     std::advance(it, index);
 
-    switch(it->second){
+    switch(it->getRestoreInfo()){
     case RValue:
-        restoreRValue(std::move(it->first.getRList()));
+        restoreRValue(std::move(it->getRList()));
         break;
     case GValue:
-        restoreGValue(std::move(it->first.getGList()));
+        restoreGValue(std::move(it->getGList()));
         break;
     case BValue:
-        restoreBValue(std::move(it->first.getBList()));
+        restoreBValue(std::move(it->getBList()));
         break;
     case RGB:
-        restoreRGB(std::move(it->first.getRGBList()));
+        restoreRGB(std::move(it->getRGBList()));
         break;
     case Angle:
-        restoreRotatedImage(it->first.getAngle());
+        restoreRotatedImage(it->getAngle());
         break;
     case FlippedHorizontally:
         restoreFlippedImage(false);
@@ -309,32 +309,32 @@ void ImageManagement::remove(const int &index)
         restoreFlippedImage(true);
         break;
     case TextOnImage:
-        restoreImageAfterInsertingText(it->first.getImageBeforeInsertingText());
+        restoreImageAfterInsertingText(it->getImageBeforeInsertingText());
         imageProvider->setImage(image);
         break;
     }
 
-    dataList.erase(it);
+    dataArray.erase(it);
 
 }
 
 void ImageManagement::duplicate(const int &index)
 {
-    std::list<std::pair<DataToRestored,ERestoreInfo>>::iterator it = dataList.begin();
+    std::vector<DataToRestored>::iterator it = dataArray.begin();
     std::advance(it, index);
 
-    switch(it->second){
+    switch(it->getRestoreInfo()){
     case RValue:
-        changeR(it->first.getValue());
+        changeR(it->getValue());
         break;
     case GValue:
-        changeG(it->first.getValue());
+        changeG(it->getValue());
         break;
     case BValue:
-        changeB(it->first.getValue());
+        changeB(it->getValue());
         break;
     case Angle:
-        rotateImage(it->first.getAngle());
+        rotateImage(it->getAngle());
         break;
     case FlippedHorizontally:
         flipImage(false);
@@ -347,7 +347,7 @@ void ImageManagement::duplicate(const int &index)
 
 void ImageManagement::clearAll()
 {
-    dataList.clear();
+    dataArray.clear();
 
 }
 
@@ -454,6 +454,8 @@ void ImageManagement::restoreImageAfterInsertingText(QImage &img)
 {
     image = img;
 }
+
+
 
 
 

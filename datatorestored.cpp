@@ -5,6 +5,11 @@ DataToRestored::DataToRestored()
     qInfo()<<"Constructor";
 }
 
+DataToRestored::DataToRestored(ERestoreInfo newRestoreInfo): restoreInfo(newRestoreInfo)
+{
+
+}
+
 DataToRestored::DataToRestored(DataToRestored &&obj) noexcept
 {
     rList = std::move(obj.rList);
@@ -13,6 +18,7 @@ DataToRestored::DataToRestored(DataToRestored &&obj) noexcept
     angle = obj.angle;
     rgbList = std::move(obj.rgbList);
     imageBefore = std::move(obj.imageBefore);
+    restoreInfo = obj.restoreInfo;
 
     qInfo()<<"Move constructor";
 }
@@ -55,4 +61,9 @@ void DataToRestored::setRGBList(std::unique_ptr<QList<QColor>> rgbListPtr)
 void DataToRestored::setImageBeforeInsertingText(QImage img)
 {
     imageBefore = img;
+}
+
+ERestoreInfo DataToRestored::getRestoreInfo() const
+{
+    return restoreInfo;
 }

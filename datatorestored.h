@@ -12,8 +12,22 @@ class DataToRestored
 {
 public:
     DataToRestored();
+    DataToRestored(ERestoreInfo newRestoreInfo);
 //    DataToRestored(const DataToRestored& obj);
     DataToRestored(DataToRestored &&obj) noexcept;
+
+    DataToRestored& operator =(const DataToRestored& obj){
+//        rList = std::move(obj.rList);
+//        gList = std::move(obj.gList);
+//        bList = std::move(obj.bList);
+//        angle = obj.angle;
+//        rgbList = std::move(obj.rgbList);
+//        imageBefore = std::move(obj.imageBefore);
+//        restoreInfo = obj.restoreInfo;
+
+        qInfo()<<"= operator";
+        return const_cast<DataToRestored&>(obj);
+    }
 
     ~DataToRestored();
 
@@ -29,7 +43,6 @@ public:
     void setImageBeforeInsertingText(QImage img);
 
 
-
     std::unique_ptr<QList<short>> getRList(){ return std::move(rList); }
     std::unique_ptr<QList<short>> getGList(){ return std::move(gList); }
     std::unique_ptr<QList<short>> getBList(){ return std::move(bList); }
@@ -41,8 +54,11 @@ public:
 
     QImage &getImageBeforeInsertingText(){ return imageBefore; }
 
+    ERestoreInfo getRestoreInfo() const;
 
 private:
+
+    ERestoreInfo restoreInfo;
 
     short value;
 

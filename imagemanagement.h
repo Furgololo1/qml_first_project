@@ -8,9 +8,7 @@
 #include <QImage>
 #include <QRgb>
 
-#include <list>
 #include <memory>
-#include <algorithm>
 
 #include "imageprovider.h"
 #include "datatorestored.h"
@@ -63,13 +61,13 @@ private:
     void restoreFlippedImage(bool bVertically);
     void restoreImageAfterInsertingText(QImage& img);
 
-    void mergeTransformationsToImage(std::list<std::pair<DataToRestored,ERestoreInfo>>::iterator it);
+    void mergeTransformationsToImage(std::vector<DataToRestored>::iterator it);
 
     ImageProvider* imageProvider;
 
     QImage image;
 
-    std::list<std::pair<DataToRestored, ERestoreInfo>> dataList;
+    std::vector<DataToRestored> dataArray;
     
 };
 
