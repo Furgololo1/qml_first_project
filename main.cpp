@@ -5,7 +5,6 @@
 #include <QQmlContext>
 #include "imagemanagement.h"
 #include "imageprovider.h"
-#include "treeviewmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,11 +17,9 @@ int main(int argc, char *argv[])
 
     ImageProvider imageProvider;
     ImageManagement imageManagement;
-    TreeViewModel myModel;
     imageManagement.setImageProvider(&imageProvider);
 
     engine.rootContext()->setContextProperty("ImageManagement", &imageManagement);
-    engine.rootContext()->setContextProperty("TreeModel", &myModel);
 
     engine.addImageProvider("imageProvider", &imageProvider);
 

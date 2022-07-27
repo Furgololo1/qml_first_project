@@ -65,8 +65,6 @@ private:
 
     void mergeTransformationsToImage(std::list<std::pair<DataToRestored,ERestoreInfo>>::iterator it);
 
-    void chooseDataToRestored(std::list<std::pair<DataToRestored,ERestoreInfo>>::iterator it);
-
     ImageProvider* imageProvider;
 
     QImage image;

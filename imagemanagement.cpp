@@ -310,7 +310,6 @@ void ImageManagement::remove(const int &index)
         break;
     case TextOnImage:
         restoreImageAfterInsertingText(it->first.getImageBeforeInsertingText());
-        mergeTransformationsToImage(it);
         imageProvider->setImage(image);
         break;
     }
@@ -456,20 +455,6 @@ void ImageManagement::restoreImageAfterInsertingText(QImage &img)
     image = img;
 }
 
-void ImageManagement::mergeTransformationsToImage(std::list<std::pair<DataToRestored,ERestoreInfo>>::iterator it)
-{
-    qInfo()<<it->second;
-    while(it != dataList.end()){
-        it++;
-        chooseDataToRestored(it);
-    }
-
-}
-
-void ImageManagement::chooseDataToRestored(std::list<std::pair<DataToRestored,ERestoreInfo>>::iterator it)
-{
-
-}
 
 
 
