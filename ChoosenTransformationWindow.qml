@@ -2,6 +2,8 @@ import QtQuick 2.0
 
 Rectangle {
     id: root
+    width: 300
+    height: 200
     z: 1
 
     signal reloadTransformatedImage()

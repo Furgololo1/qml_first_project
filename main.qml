@@ -20,17 +20,23 @@ Window {
         }
     }
 
-    Row{
-        id: buttonRow
-        spacing: 35
+    property real btnWidth: window.width/4
+
+
+    Item{
+        id: buttonItem
+        width: parent.width - 70
+        height: 50
         anchors.margins: 35
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
 
+
         MyButton{
             id: loadImageButton
-            width: 150
-            height: 50
+            anchors.left: parent.left
+            width: btnWidth
+            height: parent.height
             text: "Load image"
             onButtonPressed:{
                 ImageManagement.openFileDialog();
@@ -41,8 +47,9 @@ Window {
 
         MyButton{
             id: saveImageButton
-            width: 150
-            height: 50
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: btnWidth
+            height: parent.height
             text: "Save image"
             onButtonPressed:{
                 ImageManagement.saveImage()
@@ -51,8 +58,9 @@ Window {
 
         MyButton{
             id: resetImageButton
-            width: 150
-            height: 50
+            anchors.right: parent.right
+            width: btnWidth
+            height: parent.height
             text: "Reset"
             onButtonPressed:{
                 baseImage.loadNewImage("")
@@ -63,69 +71,69 @@ Window {
         }
     }
 
-
     Item{
 
-        anchors.topMargin: 70
-        anchors.top: buttonRow.bottom
-        x: 100
-        //anchors.horizontalCenter: buttonRow.horizontalCenter
+        height: 300
 
-        Column{
-            id: imageRow
-            spacing: 35
+        width: window.width - 70
+        anchors.top: buttonItem.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 35
 
 
-            PreviewImage{
-                id: baseImage
-                width: 300
-                height: 300
-                altText: qsTr("Base Image")
-                z: 0
-            }
+        ChoosenTransformationWindow{
+            id: choosenTransfromationWindow
 
-            PreviewImage{
-                id: previewImage
-                width: 300
-                height: 300
-                altText: qsTr("Preview Image")
-                z: 0
-            }
+            anchors.right: parent.horizontalCenter
+            anchors.rightMargin: 35
 
-        }
+            Connections{
+                target: transformationList
+                function onChooseTransformationsID(nameID, transformID){
+                    choosenTransfromationWindow.displayValueWindow(nameID, transformID)
+                }
 
-        Column{
-            spacing: 35
-            anchors.left: imageRow.right
-            anchors.top: imageRow.top
-            anchors.leftMargin: 25
-
-            TransformationsList{
-                id: transformationList
-                anchors.horizontalCenter: parent.horizontalCenter
-                // x: 600
-                // y: 300
-            }
-
-            ChoosenTransformationWindow{
-                id: choosenTransfromationWindow
-                //  x: 600
-                //   y: 550
-                width: 300
-                height: 200
-
-                Connections{
-                    target: transformationList
-                    function onChooseTransformationsID(nameID, transformID){
-                        choosenTransfromationWindow.displayValueWindow(nameID, transformID)
-                    }
-
-                    function onDestroyCurrentValueWindow(){
-                        choosenTransfromationWindow.destroyCurrentValueWindow()
-                    }
+                function onDestroyCurrentValueWindow(){
+                    choosenTransfromationWindow.destroyCurrentValueWindow()
                 }
             }
         }
+
+        TransformationsList{
+            id: transformationList
+            anchors.left: parent.horizontalCenter
+            anchors.leftMargin: 35
+        }
+
     }
+
+    Item{
+        width: parent.width - 70
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottomMargin: 35
+
+        PreviewImage{
+            id: baseImage
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            width: 300
+            height: 300
+            altText: qsTr("Base Image")
+            z: 0
+        }
+
+        PreviewImage{
+            id: previewImage
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            width: 300
+            height: 300
+            altText: qsTr("Preview Image")
+            z: 0
+        }
+
+    }
+
 
 }
